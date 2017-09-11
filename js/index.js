@@ -14,10 +14,6 @@ $( document ).ready(function() {
     }
     console.log(coord);
   }); 
-  
   function computerMove() {
-
   }
- 
-  
 });
