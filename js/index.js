@@ -13,6 +13,7 @@ $("#btnX").click(function() {
   computerSymbol = "O";
   whoGFirst();
   $("#game").show();
+  $("#symbolChoice").hide();
 });
 
 $("#btnO").click(function() {
@@ -20,6 +21,7 @@ $("#btnO").click(function() {
   computerSymbol = "X";
   whoGFirst();
   $("#game").show();
+  $("#symbolChoice").hide();
 });
 
 
@@ -41,6 +43,7 @@ function whoGFirst() {
         var valueOnCell = $("#" + idInTable).html();
         if (valueOnCell == '') {
           $(this).text(playerSymbol);
+          checkwinner(valueOnCell, idInTable);
           var removeNum = coord.indexOf(idInTable);
           if (removeNum != -1) {
             coord.splice(removeNum, 1);
@@ -49,13 +52,17 @@ function whoGFirst() {
             return;
           }
           computerMoveChk = true;
+          //checkwinner(valueOnCell, idInTable);
           setTimeout(computerMove, 1500);
         } else {
           console.log('illegal move');
         }
+        if (coord.length == 0) {
+          console.log('Game finished');
+          console.log(playedX);
+          console.log(playedO);
+        }
       }
-      
-      
   });
 //random computer move
   function computerMove() {
@@ -63,16 +70,37 @@ function whoGFirst() {
     $('#' + computerPlay).text(computerSymbol);
     var idInTable = $('#' + computerPlay).attr('id');
     var removeNum = coord.indexOf(idInTable);
+    var valueOnCell = $("#" + idInTable).html();
+    checkwinner(valueOnCell, idInTable);
     if (removeNum != -1) {
       coord.splice(removeNum, 1);
     }
     computerMoveChk = false;
+    //checkwinner(valueOnCell, idInTable);
     if (coord.length == 0) {
-      return;
+      console.log('Game finished');
     }
   }
 
   if (coord.length == 0) {
     console.log('Game finished');
+    console.log(playedX);
+    console.log(playedO);
   }
+
+//function to detect if winner exists
+var playedO = [];
+var playedX = [];
+
+function checkwinner(value, id) {
+ 
+      if (value === "O") {
+      playedO.push(id);
+    } else {
+      playedX.push(id);
+    }
+}
+
+
+
 });

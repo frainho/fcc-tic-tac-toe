@@ -6,17 +6,20 @@
   <title>Tic Tac Toe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 
 <body>
   <div>
     <h1>Tic Tac Toe</h1>
   </div>
-  <div>
+  <div id="symbolChoice">
       <p>Which symbol do you want to use</p>
       <button id='btnX'>X</button>
       <button id='btnO'>O</button>
-      <p id="infoBar"></p>
+    </div>
+    <div>
+      
     </div>
   <div id="game">
     <table>
@@ -36,6 +39,7 @@
         <td id='9'></td>
       </tr>
     </table>
+    <p id="infoBar"></p>
   </div>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

@@ -1,6 +1,7 @@
 body {
   text-align:center;
   background-color:#FFF275;
+  font-family: 'Open Sans', sans-serif;
 }
 
 table {
@@ -11,6 +12,10 @@ table {
 
 #game {
     display:none;
+}
+
+#symbolChoice {
+    display:inline;
 }
 
 td {
