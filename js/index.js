@@ -5,6 +5,7 @@ $(document).ready(function () {
 //choice of which symbol the player wants to use
 var playerSymbol;
 var computerSymbol;
+var computerMoveChk;
 
 //player choses symbol O or X
 $("#btnX").click(function() {
@@ -26,26 +27,34 @@ $("#btnO").click(function() {
 function whoGFirst() {
   var firstPlayer = Math.random();
   if (firstPlayer < 0.5) {
-    computerMove();
+    $("#infoBar").html("Computer goes first!");
+    computerMoveChk = true;
+    setTimeout(computerMove, 1000);
   }
 }
 //listen for a click on a table cell and add the chosen symbol to it
   $('td').click(function () {
-      var idInTable = $(this).attr('id');
-      var valueOnCell = $("#" + idInTable).html();
-      if (valueOnCell == '') {
-        $(this).text(playerSymbol);
-        var removeNum = coord.indexOf(idInTable);
-        if (removeNum != -1) {
-          coord.splice(removeNum, 1);
-        }
-        if (coord.length == 0) {
-          return;
-        }
-        computerMove();
+      if (computerMoveChk) {
+        $("#infoBar").html("<p>Wait for the pc</p>");
       } else {
-        console.log('illegal move');
+        var idInTable = $(this).attr('id');
+        var valueOnCell = $("#" + idInTable).html();
+        if (valueOnCell == '') {
+          $(this).text(playerSymbol);
+          var removeNum = coord.indexOf(idInTable);
+          if (removeNum != -1) {
+            coord.splice(removeNum, 1);
+          }
+          if (coord.length == 0) {
+            return;
+          }
+          computerMoveChk = true;
+          setTimeout(computerMove, 1500);
+        } else {
+          console.log('illegal move');
+        }
       }
+      
       
   });
 //random computer move
@@ -57,6 +66,7 @@ function whoGFirst() {
     if (removeNum != -1) {
       coord.splice(removeNum, 1);
     }
+    computerMoveChk = false;
     if (coord.length == 0) {
       return;
     }
