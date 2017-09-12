@@ -9,6 +9,10 @@ table {
   border-collapse: collapse;
 }
 
+#game {
+    display:none;
+}
+
 td {
   height: 150px;
   width: 150px;
