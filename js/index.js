@@ -88,14 +88,14 @@ function whoGFirst() {
 //function to detect if winner exists
 function checkwinner(value, id) {
   var possibleResults = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9],
-    [1,4,7],
-    [2,5,8],
-    [3,6,9],
-    [1,5,9],
-    [3,5,7]
+    ["1","2","3"],
+    ["4","5","6"],
+    ["7","8","9"],
+    ["1","4","7"],
+    ["2","5","8"],
+    ["3","6","9"],
+    ["1","5","9"],
+    ["3","5","7"]
   ]
   var winner;
 
@@ -104,29 +104,25 @@ function checkwinner(value, id) {
     } else {
       playedX.push(id);
     }
-    //console.log(playedO);
-    //console.log(playedX);
-   // console.log(possibleResults[0]);
 
+    console.log(playedO);
+    
     for (var i = 0; i < possibleResults.length; i++) {
-      if (playedO.indexOf(possibleResults[i]) != -1 &&
-          playedO.indexOf(possibleResults[i]) != -1 &&
-          playedO.indexOf(possibleResults[i]) != -1) {
-            console.log(playedO.indexOf(possibleResults[i][0]));
-            console.log(playedO.indexOf(possibleResults[i][1]));
-            console.log(playedO.indexOf(possibleResults[i][2]));
+      if (playedO.indexOf(possibleResults[i][0]) != -1 &&
+          playedO.indexOf(possibleResults[i][1]) != -1 &&
+          playedO.indexOf(possibleResults[i][2]) != -1) {
         winner = "Winner is O";
-      } else if (playedX.indexOf(possibleResults[i]) != -1 &&
-                 playedX.indexOf(possibleResults[i]) != -1 &&
-                 playedX.indexOf(possibleResults[i]) != -1) {
+        alert(winner);
+      } else if (playedX.indexOf(possibleResults[i][0]) != -1 &&
+                 playedX.indexOf(possibleResults[i][1]) != -1 &&
+                 playedX.indexOf(possibleResults[i][2]) != -1) {
         winner = "Winner is X";
+        alert(winner);          
       } else {
         winner = "No winner";
+        //alert(winner);
       }
     }
-    //console.log(playedX);
-    //console.log(playedO);
-    console.log(winner);
 }
 
 });
