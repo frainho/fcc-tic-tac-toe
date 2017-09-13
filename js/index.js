@@ -96,17 +96,13 @@ function checkwinner(value, id) {
     ["3","6","9"],
     ["1","5","9"],
     ["3","5","7"]
-  ]
+  ];
   var winner;
-
       if (value === "O") {
       playedO.push(id);
     } else {
       playedX.push(id);
-    }
-
-    console.log(playedO);
-    
+    }   
     for (var i = 0; i < possibleResults.length; i++) {
       if (playedO.indexOf(possibleResults[i][0]) != -1 &&
           playedO.indexOf(possibleResults[i][1]) != -1 &&
@@ -124,5 +120,4 @@ function checkwinner(value, id) {
       }
     }
 }
-
 });
