@@ -2,6 +2,8 @@ body {
   text-align:center;
   background-color:#FFF275;
   font-family: 'Open Sans', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 table {
@@ -16,6 +18,20 @@ table {
 
 #symbolChoice {
     display:inline;
+}
+
+#winnerBanner {
+    width: 100%;
+    margin: 10px auto;
+    height: 50px;
+    background-color: blue;
+    opacity: 0.2;
+    color:white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 45px;  
+    font-size: 3em;
+    display: none;
 }
 
 td {

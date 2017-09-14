@@ -1,8 +1,6 @@
 $(document).ready(function () {
-  var playerOps = ["O", "X"];
-  var coord = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-//choice of which symbol the player wants to use
+var coord = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var playerSymbol;
 var computerSymbol;
 var computerMoveChk;
@@ -46,9 +44,6 @@ function whoGFirst() {
         if (valueOnCell == '') { //checks if the cell is empty and if so
           $(this).text(playerSymbol); //adds the symbol chosen by the player
           var valueCell = $("#" + idInTable).html();
-          if (winnerFound) {
-            resetGame();
-          }
           checkwinner(valueCell, idInTable); //calls the winner check function sending in the value of the cell and the coordinate
           var removeNum = coord.indexOf(idInTable); //finds the location of the cell on the possible moves array
           if (removeNum != -1) {
@@ -75,9 +70,6 @@ function whoGFirst() {
       var removeNum = coord.indexOf(idInTable); //finds the played coordinate in the array of possible moves
       var valueOnCell = $("#" + idInTable).html(); //saves the symbol of the play to send in the checkwinner function
       var valueCell = $("#" + idInTable).html(); 
-      if (winnerFound) {
-        resetGame();
-      }
       checkwinner(valueCell, idInTable); //calls the winner check function sending in the value of the cell and the coordinate
       if (removeNum != -1) {
         coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
@@ -89,9 +81,6 @@ function whoGFirst() {
       }
     }
   
-  if (coord.length == 0) {
-    //alert('Game Finished');
-  }
   var playedO = [];
   var playedX = [];
 //function to detect if winner exists
@@ -116,21 +105,30 @@ function checkwinner(value, id) {
           playedO.indexOf(possibleResults[i][1]) != -1 &&
           playedO.indexOf(possibleResults[i][2]) != -1) {
         winner = "O";
-        winnerFound = true;
+        resetGame();
       } else if (playedX.indexOf(possibleResults[i][0]) != -1 &&
                  playedX.indexOf(possibleResults[i][1]) != -1 &&
                  playedX.indexOf(possibleResults[i][2]) != -1) {
         winner = "X";
-        winnerFound = true;
+        resetGame();
       }
     }
 
 }
     function resetGame() {
-      alert('Winner is ' + winner);
-      $('td').text('');
-      location.reload();
-
+      $("#winnerBanner").text('Winner is ' + winner);
+      $("#winnerBanner").slideDown("slow");
+      setTimeout(function() {
+        $('td').text('');
+        playedO = [];
+        playedX = [];
+        winnerFound = false;
+        winner = '';
+        $("#game").hide();
+        $("#symbolChoice").show();
+        $("#winnerBanner").hide();
+      }, 3000);
+      
     }
 
 });
