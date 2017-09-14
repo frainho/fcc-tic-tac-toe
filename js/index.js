@@ -6,6 +6,8 @@ $(document).ready(function () {
 var playerSymbol;
 var computerSymbol;
 var computerMoveChk;
+var winnerFound = false;
+var winner;
 
 //player choses symbol O or X
 $("#btnX").click(function() {
@@ -43,7 +45,10 @@ function whoGFirst() {
         var valueOnCell = $("#" + idInTable).html(); //fetches what is currently on the cell clicked
         if (valueOnCell == '') { //checks if the cell is empty and if so
           $(this).text(playerSymbol); //adds the symbol chosen by the player
-          let valueCell = $("#" + idInTable).html();
+          var valueCell = $("#" + idInTable).html();
+          if (winnerFound) {
+            resetGame();
+          }
           checkwinner(valueCell, idInTable); //calls the winner check function sending in the value of the cell and the coordinate
           var removeNum = coord.indexOf(idInTable); //finds the location of the cell on the possible moves array
           if (removeNum != -1) {
@@ -64,22 +69,26 @@ function whoGFirst() {
   });
 //random computer move
   function computerMove() {
-    var computerPlay = coord[Math.floor(Math.random() * coord.length)]; //randomizes the computer play from the available coordinates
-    $('#' + computerPlay).text(computerSymbol); //adds to the cell of the table the symbol
-    var idInTable = $('#' + computerPlay).attr('id'); //saves where the computer played TBD: Check for relevance
-    var removeNum = coord.indexOf(idInTable); //finds the played coordinate in the array of possible moves
-    var valueOnCell = $("#" + idInTable).html(); //saves the symbol of the play to send in the checkwinner function
-    let valueCell = $("#" + idInTable).html(); 
-    checkwinner(valueCell, idInTable); //calls the winner check function sending in the value of the cell and the coordinate
-    if (removeNum != -1) {
-      coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+      var computerPlay = coord[Math.floor(Math.random() * coord.length)]; //randomizes the computer play from the available coordinates
+      $('#' + computerPlay).text(computerSymbol); //adds to the cell of the table the symbol
+      var idInTable = $('#' + computerPlay).attr('id'); //saves where the computer played TBD: Check for relevance
+      var removeNum = coord.indexOf(idInTable); //finds the played coordinate in the array of possible moves
+      var valueOnCell = $("#" + idInTable).html(); //saves the symbol of the play to send in the checkwinner function
+      var valueCell = $("#" + idInTable).html(); 
+      if (winnerFound) {
+        resetGame();
+      }
+      checkwinner(valueCell, idInTable); //calls the winner check function sending in the value of the cell and the coordinate
+      if (removeNum != -1) {
+        coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+      }
+      computerMoveChk = false; //allows the computer to play
+      //checkwinner(valueOnCell, idInTable);
+      if (coord.length == 0) {
+        //alert('Game Finished');
+      }
     }
-    computerMoveChk = false; //allows the computer to play
-    //checkwinner(valueOnCell, idInTable);
-    if (coord.length == 0) {
-      //alert('Game Finished');
-    }
-  }
+  
   if (coord.length == 0) {
     //alert('Game Finished');
   }
@@ -97,7 +106,6 @@ function checkwinner(value, id) {
     ["1","5","9"],
     ["3","5","7"]
   ];
-  var winner;
       if (value === "O") {
       playedO.push(id);
     } else {
@@ -107,17 +115,22 @@ function checkwinner(value, id) {
       if (playedO.indexOf(possibleResults[i][0]) != -1 &&
           playedO.indexOf(possibleResults[i][1]) != -1 &&
           playedO.indexOf(possibleResults[i][2]) != -1) {
-        winner = "Winner is O";
-        alert(winner);
+        winner = "O";
+        winnerFound = true;
       } else if (playedX.indexOf(possibleResults[i][0]) != -1 &&
                  playedX.indexOf(possibleResults[i][1]) != -1 &&
                  playedX.indexOf(possibleResults[i][2]) != -1) {
-        winner = "Winner is X";
-        alert(winner);          
-      } else {
-        winner = "No winner";
-        //alert(winner);
+        winner = "X";
+        winnerFound = true;
       }
     }
+
 }
+    function resetGame() {
+      alert('Winner is ' + winner);
+      $('td').text('');
+      location.reload();
+
+    }
+
 });
