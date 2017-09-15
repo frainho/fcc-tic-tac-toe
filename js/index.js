@@ -24,7 +24,6 @@ $(document).ready(function () {
     $("#symbolChoice").hide();
   });
 
-
   //randomization of which player starts
   function whoGFirst() {
     var firstPlayer = Math.random();
@@ -32,6 +31,8 @@ $(document).ready(function () {
       $("#infoBar").html("Computer goes first!");
       computerMoveChk = true;
       setTimeout(computerMove, 1000);
+    } else {
+      $("#infoBar").html("You start!");
     }
   }
   //listen for a click on a table cell and add the chosen symbol to it
@@ -52,9 +53,11 @@ $(document).ready(function () {
         computerMoveChk = true; //Changes boolean to true to not allow the human to play
         setTimeout(computerMove, 1500); //waits 1,5s before triggering the computer move
       } else {
-        $("#infoBar").html("<p>There's already something there</p>"); //if there is something on the cell already it does not allow to play and throws an alert 
+        $("#infoBar").html("<p>There's already something there</p>").fadeOut("slow"); //if there is something on the cell already it does not allow to play and throws an alert 
       }
-
+    }
+    if (coord.length == 0) {
+      resetGame();
     }
   });
   //random computer move
@@ -73,7 +76,7 @@ $(document).ready(function () {
       computerMoveChk = false; //allows the computer to play
       //checkwinner(valueOnCell, idInTable);
       if (coord.length == 0) {
-        //alert('Game Finished');
+        resetGame();
       }
     }
 
@@ -109,25 +112,28 @@ $(document).ready(function () {
         playedX.indexOf(possibleResults[i][2]) != -1) {
         winner = "X";
         resetGame();
+      } else if (coord.length == 0) {
+        resetGame();
       }
     }
-
   }
 
   function resetGame() {
-    $("#winnerBanner").text('Winner is ' + winner);
-    $("#winnerBanner").slideDown("slow");
+    if (winner == computerSymbol) {
+      $("#winnerBanner").text('Winner is CPU');
+      $("#winnerBanner").slideDown("slow");
+    } else if (winner == playerSymbol) {
+      $("#winnerBanner").text('You win!');
+      $("#winnerBanner").slideDown("slow");
+    } else {
+      $("#winnerBanner").text("It's a tie!");
+      $("#winnerBanner").slideDown("slow");
+    }
     setTimeout(function () {
-      $('td').text('');
-      playedO = [];
-      playedX = [];
-      winnerFound = false;
-      winner = '';
-      $("#game").hide();
-      $("#symbolChoice").show();
-      $("#winnerBanner").hide();
+      location.reload();
     }, 3000);
 
   }
-
 });
+
+console.log($("#3").prop("tagName"));
