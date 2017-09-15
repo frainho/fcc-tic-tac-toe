@@ -5,7 +5,7 @@ var playerSymbol;
 var computerSymbol;
 var computerMoveChk;
 var winnerFound = false;
-var winner;
+var winner = '';
 
 //player choses symbol O or X
 $("#btnX").click(function() {
@@ -64,6 +64,7 @@ function whoGFirst() {
   });
 //random computer move
   function computerMove() {
+    if (winner == '') {
       var computerPlay = coord[Math.floor(Math.random() * coord.length)]; //randomizes the computer play from the available coordinates
       $('#' + computerPlay).text(computerSymbol); //adds to the cell of the table the symbol
       var idInTable = $('#' + computerPlay).attr('id'); //saves where the computer played TBD: Check for relevance
@@ -79,6 +80,8 @@ function whoGFirst() {
       if (coord.length == 0) {
         //alert('Game Finished');
       }
+    } 
+    
     }
   
   var playedO = [];
