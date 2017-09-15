@@ -128,7 +128,5 @@ function checkwinner(value, id) {
         $("#symbolChoice").show();
         $("#winnerBanner").hide();
       }, 3000);
-      
     }
-
 });
