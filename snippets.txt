@@ -1,0 +1,107 @@
+ else {
+          for (var j = 0; j < possibleResults.length; j++) {
+            if (human.indexOf(possibleResults[i][0]) != -1 &&
+                human.indexOf(possibleResults[i][1]) != -1) {
+                  if ($("#" + possibleResults[i][2]) == ''){
+                    $("#" + possibleResults[i][2]).text(computerSymbol);
+                    computer.push(possibleResults[i][2]);
+                    var removeNum = coord.indexOf(possibleResults[i][2]);
+                    if (removeNum != -1) {
+                      coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+                    }
+                    computerMoveChk = false;
+                    return;
+                  }
+                } else if (human.indexOf(possibleResults[i][0]) != -1 &&
+                           human.indexOf(possibleResults[i][2]) != -1) {
+                            if ($("#" + possibleResults[i][1]) == ''){
+                              $("#" + possibleResults[i][1]).text(computerSymbol);
+                              computer.push(possibleResults[i][1]);
+                              var removeNum = coord.indexOf(possibleResults[i][1]);
+                              if (removeNum != -1) {
+                                coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+                              }
+                              computerMoveChk = false;
+                              return;
+                            }
+                            
+                } else if (human.indexOf(possibleResults[i][1]) != -1 &&
+                           human.indexOf(possibleResults[i][2]) != -1) {
+                            if ($("#" + possibleResults[i][0]) == ''){
+                              $("#" + possibleResults[i][0]).text(computerSymbol);
+                              computer.push(possibleResults[i][0]);
+                              var removeNum = coord.indexOf(possibleResults[i][0]);
+                              if (removeNum != -1) {
+                                coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+                              }
+                              computerMoveChk = false;
+                              return;
+                            }
+                }
+          }
+        }
+
+
+
+
+        --------------------------------------------------------
+
+
+
+          function computerMove() {
+    if (winner == '') {
+      for (var i = 0; i < possibleResults.length; i++) {
+        if (computer.indexOf(possibleResults[i][0]) != -1 && computer.indexOf(possibleResults[i][1]) != -1) {
+          if (coord.indexOf(possibleResults[i][2]) != -1) {
+            $("#" + possibleResults[i][2]).text(computerSymbol);
+            computer.push(possibleResults[i][2]);
+            var removeNum = coord.indexOf(possibleResults[i][2]);
+            if (removeNum != -1) {
+              coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+            }
+            computerMoveChk = false;
+            checkwinner(computerSymbol, possibleResults[i][2]); //calls the winner check function sending in the value of the cell and the coordinate
+            return;
+          }
+        } else if (computer.indexOf(possibleResults[i][0]) != -1 && computer.indexOf(possibleResults[i][2]) != -1) {
+          if (coord.indexOf(possibleResults[i][1]) != -1) {
+            $("#" + possibleResults[i][1]).text(computerSymbol);
+            computer.push(possibleResults[i][1]);
+            var removeNum = coord.indexOf(possibleResults[i][1]);
+            if (removeNum != -1) {
+              coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+            }
+            computerMoveChk = false;
+            checkwinner(computerSymbol, possibleResults[i][2]);
+            return;
+          }
+        } else if (computer.indexOf(possibleResults[i][1]) != -1 && computer.indexOf(possibleResults[i][2]) != -1) {
+          if (coord.indexOf(possibleResults[i][0]) != -1) {
+            $("#" + possibleResults[i][3]).text(computerSymbol);
+            computer.push(possibleResults[i][0]);
+            var removeNum = coord.indexOf(possibleResults[i][0]);
+            if (removeNum != -1) {
+              coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+            }
+            computerMoveChk = false;
+            checkwinner(computerSymbol, possibleResults[i][2]);
+            return;
+          }
+        }
+      }
+      var computerPlay = coord[Math.floor(Math.random() * coord.length)]; //randomizes the computer play from the available coordinates
+      $('#' + computerPlay).text(computerSymbol);   //adds to the cell of the table the symbol
+      var idInTable = $('#' + computerPlay).attr('id'); //saves where the computer played TBD: Check for relevance
+      computer.push(idInTable);
+      var removeNum = coord.indexOf(idInTable); //finds the played coordinate in the array of possible moves
+      var valueOnCell = $("#" + idInTable).html(); //saves the symbol of the play to send in the checkwinner function
+      var valueCell = $("#" + idInTable).html(); 
+      checkwinner(valueCell, idInTable); //calls the winner check function sending in the value of the cell and the coordinate
+      if (removeNum != -1) {
+        coord.splice(removeNum, 1); //removes the coordinate played from the array of possible moves
+      }
+      computerMoveChk = false; //allows the computer to play
+
+    } 
+    
+    }
