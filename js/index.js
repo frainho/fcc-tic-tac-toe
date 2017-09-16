@@ -65,7 +65,7 @@ $(document).ready(function () {
     if (winner == '') {
       var computerPlay = coord[Math.floor(Math.random() * coord.length)]; //randomizes the computer play from the available coordinates
       $('#' + computerPlay).text(computerSymbol); //adds to the cell of the table the symbol
-      var idInTable = $('#' + computerPlay).attr('id'); //saves where the computer played TBD: Check for relevance
+      var idInTable = $('#' + computerPlay).attr('id'); //saves where the computer played
       var removeNum = coord.indexOf(idInTable); //finds the played coordinate in the array of possible moves
       var valueOnCell = $("#" + idInTable).html(); //saves the symbol of the play to send in the checkwinner function
       var valueCell = $("#" + idInTable).html();
@@ -117,7 +117,7 @@ $(document).ready(function () {
       }
     }
   }
-
+  //show who's the winner and resets the game by page reload
   function resetGame() {
     if (winner == computerSymbol) {
       $("#winnerBanner").text('Winner is CPU');
@@ -135,5 +135,3 @@ $(document).ready(function () {
 
   }
 });
-
-console.log($("#3").prop("tagName"));
