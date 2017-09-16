@@ -57,3 +57,40 @@ table tr td:last-child,
 table tr th:last-child {
     border-right: 0;
 }
+
+hr {
+    margin-top: 25px;
+    width:25%;
+  }
+  
+  a {
+    color:black;
+  }
+  
+  a:hover {
+    color:grey;
+  }
+
+/* Media Queries */
+
+@media screen and (max-width: 700px) {
+    
+    hr {
+    margin-top: 60px;
+    width:50%;
+  }
+    table {
+        width: 75%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+  
+    hr {
+    margin-top: 60px;
+    width:75%;
+  }
+    table {
+    height: 150px;
+  }
+  }  
